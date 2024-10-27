@@ -21,7 +21,6 @@
 
         <div class="container-fluid mt-2">
             <div class="row">
-                <!-- Sidebar de Filtros -->
                 <div class="col-md-3">
                     <h5>Filtros</h5>
                     <hr />
@@ -35,7 +34,6 @@
 
                     <h6 class="mt-4">Autor</h6>
                     <ul class="list-group">
-                        <!-- Carga dinámica de autores -->
                         <c:forEach items="${autores}" var="autor">
                             <li class="list-group-item">${autor.nombre}</li>
                         </c:forEach>
@@ -43,12 +41,11 @@
 
                 </div>
 
-                <!-- Catálogo de Productos -->
                 <div class="col-md-9">
                     <h5>Catálogo de Productos</h5>
                     <hr />
                     <div class="d-flex justify-content-between">
-                        <p>Artículos 1-15 de 955</p>
+                        <p>Artículos 1-15 de 100</p>
                         <div>
                             <select class="form-select form-select-sm" style="width: auto; display: inline-block;">
                                 <option selected>Ordenar por: Posición</option>
@@ -63,7 +60,6 @@
                     </div>
 
                     <div class="row">
-                        <!-- Listado de productos -->
                         <c:forEach items="${productos}" var="item">
                             <div class="col-sm-3 mt-1" style="padding: 15px">
                                 <form action="CarritoControlador" method="get">
@@ -77,7 +73,6 @@
                                                 </button>
                                                 <small class="fw-bold">S/ ${item.precio}</small>
                                             </div>
-                                            <!-- Badge de descuento -->
                                             <span class="badge bg-danger mt-2">-20%</span>
                                         </div>
                                     </div>
