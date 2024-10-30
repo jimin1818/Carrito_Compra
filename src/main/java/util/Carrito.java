@@ -43,6 +43,7 @@ public class Carrito {
     
     public ArrayList<DetallePedido> ObtenerSesion(HttpServletRequest request){
         ArrayList<DetallePedido> lista;
+        
         if (request.getSession().getAttribute("carrito") == null) {
             lista = new ArrayList<>();
         }else{

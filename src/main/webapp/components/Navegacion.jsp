@@ -74,39 +74,47 @@
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid d-flex align-items-center">
 
-        <a class="navbar-brand d-flex flex-column" href="#">
-            <img src="img/img/recursos/logo.png" alt="Logo" style="width: 50px; height: auto;">
+        <a class="navbar-brand d-flex flex-column me-3" href="#">
+            <img src="img/img/recursos/logo.png" alt="Logo" style="width: 80px; height: auto;">
         </a>
 
-        <a class="nav-link home-link" aria-current="page" href="index.jsp">
+        <a class="nav-link home-link ms-3 me-3 d-none d-lg-block" aria-current="page" href="index.jsp">
             <i class="fa fa-home"></i> Home
         </a>
 
-        <a class="navbar-brand d-flex flex-column ms-3" href="#">
+        <a class="navbar-brand d-flex flex-column ms-3 me-4" href="#">
             Ibero Librerías
             <small>Buenos libros para todos</small>
         </a>
 
-        <form class="search-bar d-flex ms-4">
-            <input type="text" placeholder="Buscar por título, autor o ISBN" aria-label="Buscar">
-            <button type="submit"><i class="fas fa-search"></i></button>
-        </form>
+        <!-- Toggle button for mobile view -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-        <div class="right-icons d-flex ms-auto">
-            <a href="#" class="nav-link">Blog</a>
-            <a href="#" class="nav-link">Tiendas</a>
-            <a href="ClienteControlador?accion=nuevo"><i class="fas fa-user-plus"></i> Registrarse</a>
-            <a href="CarritoControlador?accion=listar">
-                <i class="fa fa-shopping-cart"></i> 
-                (<span class="fw-bold">${sessionScope.carrito != null ? sessionScope.carrito.size() : 0}</span>) Carrito
-            </a>
+        <!-- Collapsible content for mobile view -->
+        <div class="collapse navbar-collapse" id="navbarContent">
+            <form class="search-bar d-flex my-3 my-lg-0 ms-lg-4">
+                <input type="text" placeholder="Buscar por título o autor" aria-label="Buscar">
+                <button type="submit"><i class="fas fa-search"></i></button>
+            </form>
+
+            <div class="right-icons d-flex ms-lg-auto">
+                <a href="#" class="nav-link">Blog</a>
+                <a href="#" class="nav-link">Tiendas</a>
+                <a href="ClienteControlador?accion=nuevo"><i class="fas fa-user-plus"></i> Registrarse</a>
+                <a href="CarritoControlador?accion=listar">
+                    <i class="fa fa-shopping-cart"></i> 
+                    (<span class="fw-bold">${sessionScope.carrito != null ? sessionScope.carrito.size() : 0}</span>) Carrito
+                </a>
+            </div>
         </div>
     </div>
 </nav>
 
 <div class="lower-navbar text-center">
     <div class="container d-flex justify-content-center">
-        <div class="navbar-nav d-flex flex-row">
+        <div class="navbar-nav d-flex flex-row flex-wrap justify-content-center">
             <a class="nav-link" href="#">Novedades</a>
             <a class="nav-link" href="#">No Ficción</a>
             <a class="nav-link" href="#">Romance</a>
@@ -121,3 +129,4 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76A9YHarIhF1yLgt8VJATtjF0OsfhaBw1JJ0yOp6Ewl7v5E4Fo5o2bMZt0ikP5r" crossorigin="anonymous"></script>
 </body>
 </html>
+

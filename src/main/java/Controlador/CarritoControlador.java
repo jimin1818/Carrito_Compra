@@ -21,9 +21,18 @@ import util.Carrito;
  */
 public class CarritoControlador extends HttpServlet {
    
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    
     private String PagListarCarrito = "PagCarrito.jsp";
     private String PagInicio = "index.jsp";
-    
     private ProductoDAO prodDao = new ProductoDAO();
     private Carrito objCarrito = new Carrito();
     
@@ -46,14 +55,7 @@ public class CarritoControlador extends HttpServlet {
         }
     }
 
-    protected void Listar(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        ArrayList<DetallePedido> lista = objCarrito.ObtenerSesion(request);
-        request.setAttribute("carrito", lista);
-        request.setAttribute("total", objCarrito.ImporteTotal(lista));
-        request.getRequestDispatcher(PagListarCarrito).forward(request, response);
-    }
+
     protected void Agregar(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -68,6 +70,16 @@ public class CarritoControlador extends HttpServlet {
             objCarrito.AgregarCarrito(objDet, request);
         }
         request.getRequestDispatcher(PagInicio).forward(request, response);
+    }
+    
+        protected void Listar(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        
+        ArrayList<DetallePedido> lista = objCarrito.ObtenerSesion(request);
+        request.setAttribute("carrito", lista);
+        request.setAttribute("total", objCarrito.ImporteTotal(lista));
+        request.getRequestDispatcher(PagListarCarrito).forward(request, response);
     }
     
     protected void Eliminar(HttpServletRequest request, HttpServletResponse response)

@@ -21,12 +21,12 @@
 
         <div class="container-fluid mt-2">
             <div class="row">
-                <div class="col-md-3">
+                <!-- Filtros en pantallas grandes, se ocultan en pantallas pequeñas -->
+                <div class="col-lg-3 d-none d-lg-block">
                     <h5>Filtros</h5>
-                    <hr />
+                    <hr /> 
                     <h6>Categoría</h6>
                     <ul class="list-group">
-                        <!-- Carga dinámica de categorías -->
                         <c:forEach items="${categorias}" var="categoria">
                             <li class="list-group-item">${categoria.nombre}</li>
                         </c:forEach>
@@ -38,20 +38,43 @@
                             <li class="list-group-item">${autor.nombre}</li>
                         </c:forEach>
                     </ul>
-
                 </div>
 
-                <div class="col-md-9">
+                <!-- Filtros como dropdown en pantallas pequeñas -->
+                <div class="col-12 d-lg-none">
+                    <button class="btn btn-secondary w-100 mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#filtros" aria-expanded="false" aria-controls="filtros">
+                        Filtros
+                    </button>
+                    <div class="collapse" id="filtros">
+                        <h5>Filtros</h5>
+                        <hr />
+                        <h6>Categoría</h6>
+                        <ul class="list-group">
+                            <c:forEach items="${categorias}" var="categoria">
+                                <li class="list-group-item">${categoria.nombre}</li>
+                            </c:forEach>
+                        </ul>
+
+                        <h6 class="mt-4">Autor</h6>
+                        <ul class="list-group">
+                            <c:forEach items="${autores}" var="autor">
+                                <li class="list-group-item">${autor.nombre}</li>
+                            </c:forEach>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-9">
                     <h5>Catálogo de Productos</h5>
                     <hr />
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex flex-column flex-md-row justify-content-between align-items-start">
                         <p>Artículos 1-15 de 100</p>
-                        <div>
-                            <select class="form-select form-select-sm" style="width: auto; display: inline-block;">
+                        <div class="d-flex">
+                            <select class="form-select form-select-sm me-2">
                                 <option selected>Ordenar por: Posición</option>
                                 <option value="precio">Precio</option>
                             </select>
-                            <select class="form-select form-select-sm" style="width: auto; display: inline-block;">
+                            <select class="form-select form-select-sm">
                                 <option selected>Mostrar: 15</option>
                                 <option value="30">30</option>
                                 <option value="50">50</option>
@@ -61,9 +84,11 @@
 
                     <div class="row">
                         <c:forEach items="${productos}" var="item">
-                            <div class="col-sm-3 mt-1" style="padding: 15px">
+                            <div class="col-6 col-md-4 col-lg-3 mt-3">
                                 <form action="CarritoControlador" method="get">
-                                    <div class="card">
+                                    <div class="card h-100">
+                                        <input type="hidden" name="accion" value="agregar">
+                                        <input type="hidden" name="id" value="${item.idProd}">
                                         <img src="assets/img/productos/${item.imagen}" width="100%" alt="${item.nombre}" class="card-img-top"/>
                                         <div class="card-body">
                                             <p class="fw-bold">${item.nombre}</p>
@@ -73,7 +98,6 @@
                                                 </button>
                                                 <small class="fw-bold">S/ ${item.precio}</small>
                                             </div>
-                                            <span class="badge bg-danger mt-2">-20%</span>
                                         </div>
                                     </div>
                                 </form>
@@ -87,4 +111,3 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     </body>
 </html>
-
