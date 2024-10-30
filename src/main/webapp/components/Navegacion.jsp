@@ -83,7 +83,7 @@
         </a>
 
         <a class="navbar-brand d-flex flex-column ms-3 me-4" href="#">
-            Ibero Librerías
+            Susurros de Tinta entre Páginas Mágicas
             <small>Buenos libros para todos</small>
         </a>
 
