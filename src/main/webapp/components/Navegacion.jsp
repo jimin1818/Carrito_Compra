@@ -9,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1XsbALwX7iomSU" crossorigin="anonymous">
     <style>
         .navbar {
-            background-color: #f5f9fc !important;
+            background-color: #000000 !important;
         }
         .navbar-brand {
             font-size: 1.5rem;
@@ -75,16 +75,16 @@
     <div class="container-fluid d-flex align-items-center">
 
         <a class="navbar-brand d-flex flex-column me-3" href="#">
-            <img src="img/img/recursos/logo.png" alt="Logo" style="width: 80px; height: auto;">
+            <img src="assets/img/recursos/logo.png" alt="Logo" style="width: 80px; height: auto;">
         </a>
 
         <a class="nav-link home-link ms-3 me-3 d-none d-lg-block" aria-current="page" href="index.jsp">
             <i class="fa fa-home"></i> Home
         </a>
 
-        <a class="navbar-brand d-flex flex-column ms-3 me-4" href="#">
-            Susurros de Tinta entre Páginas Mágicas
-            <small>Buenos libros para todos</small>
+        <a class="navbar-brand d-flex flex-column ms-3 me-4" href="">
+            Susurros de Tinta 
+            <small>Entre Páginas Mágicas</small>
         </a>
 
         <!-- Toggle button for mobile view -->

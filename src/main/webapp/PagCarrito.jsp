@@ -15,7 +15,7 @@
         <title>Carrito de compras</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link href="img/css/estilos.css" rel="stylesheet" type="text/css"/>
+        <link href="assets/css/estilos.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <jsp:include page="components/Navegacion.jsp"/>
@@ -48,7 +48,7 @@
                                             </td>
                                             <td>${item.producto.nombre}</td>
                                             <td><fmt:formatNumber value = "${item.producto.precio}" type="number" minFractionDigits="2" maxFractionDigits="2"/> </td>
-                                            <td><fmt:formatNumber value = "${item.cantidad}" type="number" minFractionDigits="2" maxFractionDigits="2"/> </td>
+                                            <td style="text-align: center"> ${item.cantidad}</td>
                                             <td><fmt:formatNumber value = "${item.Importe()}" type="number" minFractionDigits="2" maxFractionDigits="2"/> </td>
                                             <td>
                                                 <a href="CarritoControlador?accion=eliminar&indice=${loop.index}" title="Eliminar" class="btn btn-danger brn-sm">

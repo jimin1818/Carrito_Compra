@@ -31,8 +31,6 @@
                             <li class="list-group-item">${categoria.nombre}</li>
                         </c:forEach>
                     </ul>
-
-                    <h6 class="mt-4">Autor</h6>
                     <ul class="list-group">
                         <c:forEach items="${autores}" var="autor">
                             <li class="list-group-item">${autor.nombre}</li>
