@@ -15,10 +15,22 @@
         <title>Carrito de compras</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" href="css/css.css"/>
+        <link rel="stylesheet" href="assets/estilos.css"/>
     </head>
     <body>
         <jsp:include page="components/Navegacion.jsp"/>
+
+        <section class="banner">
+            <img src="assets/img/Novedades/BannerPromocional1.png" alt="Banner Promocional 1" class="img-fluid"/>
+            <img src="assets/img/Novedades/BannerPromocional2.png"" alt="Banner Promocional 2" class="img-fluid"/>
+            <img src="assets/img/Novedades/BannerPromocional3.png"" alt="Banner Promocional 3" class="img-fluid"/>
+        </section>
+
+        <section class="novedades">
+            <h2>Novedades</h2>
+
+            <a href="#" class="view-more">Ver más</a>
+        </section>
 
         <div class="container-fluid mt-2">
             <div class="row">
@@ -29,7 +41,7 @@
                     <ul class="list-group">
                         <c:forEach items="${categorias}" var="categoria">
                             <li class="list-group-item">${categoria.nombre}</li>
-                        </c:forEach>
+                            </c:forEach>
                     </ul>
                 </div>
 
@@ -52,30 +64,38 @@
                     </div>
 
                     <div class="row">
+                        <c:set var="count" value="0"/>
                         <c:forEach items="${productos}" var="item">
-                            <div class="col-sm-3 mt-1" style="padding: 15px">
-                                <form action="CarritoControlador" method="get">
-                                    <div class="card">
-                                        <input type="hidden" name="accion" value="agregar">
-                                        <input type="hidden" name="id" value="${item.idProd}">
-                                        <img src="assets/img/productos/${item.imagen}" width="100%" alt="${item.nombre}" class="card-img-top"/>
-                                        <div class="card-body">
-                                            <p class="fw-bold">${item.nombre}</p>
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <button type="submit" class="btn btn-sm btn-primary">
-                                                    <i class="fa fa-shopping-cart"></i> Agregar al carrito
-                                                </button>
-                                                <small class="fw-bold">S/ <fmt:formatNumber value="${item.precio}" type="number" minFractionDigits="2" maxFractionDigits="2"/></small>
+                            <c:if test="${count < 5}">
+                                <div class="col-sm-3 mt-1" style="padding: 15px">
+                                    <form action="CarritoControlador" method="get">
+                                        <div class="card">
+                                            <input type="hidden" name="accion" value="agregar">
+                                            <input type="hidden" name="id" value="${item.idProd}">
+                                            <img src="assets/img/productos/${item.imagen}" width="100%" alt="${item.nombre}" class="card-img-top"/>
+                                            <div class="card-body">
+                                                <p class="fw-bold">${item.nombre}</p>
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <button type="submit" class="btn btn-sm btn-primary">
+                                                        <i class="fa fa-shopping-cart"></i> Agregar al carrito
+                                                    </button>
+                                                    <small class="fw-bold">S/ <fmt:formatNumber value="${item.precio}" type="number" minFractionDigits="2" maxFractionDigits="2"/></small>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </form>
-                            </div>
+                                    </form>
+                                </div>
+                                <c:set var="count" value="${count + 1}"/>
+                            </c:if>
                         </c:forEach>
                     </div>
                 </div>
             </div>
         </div>
+
+        <footer>
+            <p>&copy; 2024 Susurros de Tinta Entre Páginas Mágicas - Todos los derechos reservados</p>
+        </footer>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     </body>

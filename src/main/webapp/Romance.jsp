@@ -52,31 +52,34 @@
                     </div>
 
                     <div class="row">
+                        <c:set var="count" value="0"/>
                         <c:forEach items="${productos}" var="item">
-                            <div class="col-sm-3 mt-1" style="padding: 15px">
-                                <form action="CarritoControlador" method="get">
-                                    <div class="card">
-                                        <input type="hidden" name="accion" value="agregar">
-                                        <input type="hidden" name="id" value="${item.idProd}">
-                                        <img src="assets/img/Romance/${item.imagen}" width="100%" alt="${item.nombre}" class="card-img-top"/>
-                                        <div class="card-body">
-                                            <p class="fw-bold">${item.nombre}</p>
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <button type="submit" class="btn btn-sm btn-primary">
-                                                    <i class="fa fa-shopping-cart"></i> Agregar al carrito
-                                                </button>
-                                                <small class="fw-bold">S/ <fmt:formatNumber value="${item.precio}" type="number" minFractionDigits="2" maxFractionDigits="2"/></small>
+                            <c:if test="${count < 12}">
+                                <div class="col-sm-3 mt-1" style="padding: 15px">
+                                    <form action="CarritoControlador" method="get">
+                                        <div class="card">
+                                            <input type="hidden" name="accion" value="agregar">
+                                            <input type="hidden" name="id" value="${item.idProd}">
+                                            <img src="assets/img/Romance/${item.imagen}" width="100%" alt="${item.nombre}" class="card-img-top"/>
+                                            <div class="card-body">
+                                                <p class="fw-bold">${item.nombre}</p>
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <button type="submit" class="btn btn-sm btn-primary">
+                                                        <i class="fa fa-shopping-cart"></i> Agregar al carrito
+                                                    </button>
+                                                    <small class="fw-bold">S/ <fmt:formatNumber value="${item.precio}" type="number" minFractionDigits="2" maxFractionDigits="2"/></small>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </form>
-                            </div>
+                                    </form>
+                                </div>
+                                <c:set var="count" value="${count + 1}"/>
+                            </c:if>
                         </c:forEach>
                     </div>
                 </div>
             </div>
         </div>
-
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     </body>
 </html>

@@ -10,5 +10,97 @@
 .form-resgistro{
     max-width: 600px;
     margin: auto;
-    
+
 }
+
+.banner {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    white: 400px;
+    padding: 10px;
+}
+
+.banner img {
+    max-width: 20%;
+    margin: 0 10px;
+    border-radius: 5px;
+}
+.top-bar {
+    background-color: #f00;
+    color: #000;
+    text-align: center;
+    padding: 1px ;
+    font-size: 14px;
+}
+
+
+.navbar {
+    background-color: #000000 !important;
+}
+.navbar-brand {
+    font-family: 'Gabriola', sans-serif;
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #008db9;
+}
+.navbar-brand small {
+    font-family: 'Gabriola', sans-serif;
+    display: block;
+    font-size: 0.9rem;
+    color: #006a8e;
+}
+.search-bar {
+    flex-grow: 1;
+    max-width: 600px;
+    position: relative;
+}
+.search-bar input {
+    width: 100%;
+    padding: 8px 20px 8px 30px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    outline: none;
+}
+.search-bar button {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: transparent;
+    border: none;
+    color: #00458b;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+.navbar-nav .nav-link {
+    color: #005b91;
+    font-weight: 500;
+    margin-left: 15px;
+    font-size: 0.9rem;
+}
+.right-icons a {
+    color: #008db9;
+    margin-left: 15px;
+    font-size: 0.9rem;
+}
+.right-icons a i {
+    margin-right: 5px;
+}
+.lower-navbar {
+    background-color: #e9f4fc;
+    padding: 8px 0;
+}
+.lower-navbar .nav-link {
+    color: #005b91;
+    font-weight: 500;
+    font-size: 0.9rem;
+    padding: 0 15px;
+}
+footer {
+    background-color: #f00;
+    text-align: center;
+    padding: 15px 0;
+    margin-top: 20px;
+}
+
