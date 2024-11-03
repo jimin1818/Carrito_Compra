@@ -4,7 +4,6 @@
     Author     : tania
 --%>
 
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!doctype html>
@@ -12,7 +11,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Carrito de compras</title>
+        <title>Catalogo</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link href="assets/css/estilos.css" rel="stylesheet" type="text/css"/>
@@ -44,12 +43,12 @@
                                     <c:forEach items="${carrito}" var="item" varStatus="loop">
                                         <tr>
                                             <td>
-                                                <img src="assets/img/productos/${item.producto.imagen}" width="50px" height="60px" alt="${item.producto.nombre}"/>
+                                                <img src="img/img/productos/${item.producto.imagen}" width="50px" height="60px" alt="${item.producto.nombre}"/>
                                             </td>
                                             <td>${item.producto.nombre}</td>
-                                            <td><fmt:formatNumber value = "${item.producto.precio}" type="number" minFractionDigits="2" maxFractionDigits="2"/> </td>
-                                            <td style="text-align: center"> ${item.cantidad}</td>
-                                            <td><fmt:formatNumber value = "${item.Importe()}" type="number" minFractionDigits="2" maxFractionDigits="2"/> </td>
+                                            <td>${item.producto.precio}</td>
+                                            <td>${item.cantidad}</td>
+                                            <td>${item.Importe()}</td>
                                             <td>
                                                 <a href="CarritoControlador?accion=eliminar&indice=${loop.index}" title="Eliminar" class="btn btn-danger brn-sm">
                                                     <i class="fa fa-trash-alt"></i>
@@ -77,7 +76,7 @@
                                 <hr />
                                 <div class="d-flex justify-content-between mb-4">
                                     <p class="mb-2"> TOTAL </p>
-                                    <p class="mb-2"><fmt:formatNumber value= "${total}" type="number" minFractionDigits="2" maxFractionDigits="2"/></p>
+                                    <p class="mb-2"> S/${total} </p>
                                 </div>
                                 <button class="btn btn-warning btn-block btn-lg">
                                     <div class="d-flex justify-content-between">

@@ -4,10 +4,6 @@
  */
 package Modelo;
 
-/**
- *
- * @author braya
- */
 public class Cliente {
     
     private int idCliente;
