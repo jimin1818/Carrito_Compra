@@ -1,80 +1,73 @@
 package Controlador;
 
-import Modelo.DetallePedido;
-import Modelo.Producto;
-import ModeloDAO.ProductoDAO;
+import Modelo.Cliente;
+import ModeloDAO.AuthDAO;
 import java.io.IOException;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import util.Carrito;
 
-/**
- *
- * @author tania
- */
-public class CarritoControlador extends HttpServlet {
+public class AuthControlador extends HttpServlet {
 
-   
-    private String PagListarCarrito = "PagCarrito.jsp";
-    private String PagInicio = "index.jsp";
-    
-    private ProductoDAO prodDao = new ProductoDAO();
-    private Carrito objCarrito = new Carrito();
-    
+
+private AuthDAO authdao = new AuthDAO();
+    private final String pagLogin = "PagLogin.jsp";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+
         String accion = request.getParameter("accion");
         switch (accion) {
-            case "listar":
-                Listar(request, response);
+            case "login":
+                Login(request, response);
                 break;
-            case "agregar":
-                Agregar(request, response);
+            case "autentificarse":
+                Autentificarse(request, response);
                 break;
-            case "eliminar":
-                Eliminar(request, response);
+            case "logout":
+                Logout(request, response);
                 break;
             default:
                 throw new AssertionError();
         }
     }
 
-    protected void Listar(HttpServletRequest request, HttpServletResponse response)
+    protected void Autentificarse(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        ArrayList<DetallePedido> lista = objCarrito.ObtenerSesion(request);
-        request.setAttribute("carrito", lista);
-        request.setAttribute("total", objCarrito.ImporteTotal(lista));
-        request.getRequestDispatcher(PagListarCarrito).forward(request, response);
-    }
-    protected void Agregar(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        int idProd = Integer.parseInt(request.getParameter( "id"));
-        Producto obj = prodDao.BuscarPorId(idProd);
-        
+
+        String correo = request.getParameter("correo");
+        String password = request.getParameter("password");
+
+        Cliente obj = authdao.Login(correo, password);
+
         if (obj != null) {
-            DetallePedido objDet = new DetallePedido();
-            objDet.setProducto(obj);
-            objDet.setCantidad(1);
-            
-            objCarrito.AgregarCarrito(objDet, request);
+            request.getSession().setAttribute("usuario", obj);
+            response.sendRedirect("index.jsp");
+        } else {
+            request.getSession().setAttribute("error", "Correp y/o contraseña incorrecta");
+            request.getRequestDispatcher(pagLogin).forward(request, response);
+
         }
-        request.getRequestDispatcher(PagInicio).forward(request, response);
+
+    }
+
+    protected void Login(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+
+        request.getRequestDispatcher(pagLogin).forward(request, response);
+
     }
     
-    protected void Eliminar(HttpServletRequest request, HttpServletResponse response)
+        protected void Logout(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        int indice = Integer.parseInt(request.getParameter( "indice"));
-        
-        objCarrito.RemoverItemCarrito(request, indice);
-        
-        response.sendRedirect("CarritoControlador?accion=listar");
+
+        request.getSession().removeAttribute("usuario");
+        response.sendRedirect("index.jsp");
     }
 
 

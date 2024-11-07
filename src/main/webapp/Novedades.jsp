@@ -3,7 +3,6 @@
     Created on : 31 oct. 2024, 11:33:30
     Author     : tania
 --%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -15,64 +14,78 @@
         <title>Novedades</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" href="css/css.css"/>
+        <link rel="stylesheet" href="assets/estilos.css"/>
+        <style>
+            /* Estilos personalizados para las tarjetas de productos */
+            .container {
+                max-width: 1000px;
+                margin: auto;
+                text-align: center;
+            }
+            .products-viewing {
+                margin-bottom: 20px;
+                font-size: 14px;
+                color: #666;
+            }
+            .card {
+                width: 150px;
+                margin: 20px auto;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                border-radius: 10px;
+                overflow: hidden;
+            }
+            .card img {
+                height: 200px;
+                object-fit: cover;
+            }
+            .card-body p {
+                font-size: 14px;
+                font-weight: bold;
+            }
+            .card-body small {
+                font-size: 14px;
+                color: #00796b;
+            }
+            
+        </style>
     </head>
     <body>
         <jsp:include page="components/Navegacion.jsp"/>
 
-        <div class="container-fluid mt-2">
-            <div class="row">
-                <div class="col-md-3">
-                    <h5>Filtros</h5>
-                    <hr /> 
-                    <h6>Categoría</h6>
-                    <ul class="list-group">
-                        <c:forEach items="${categorias}" var="categoria">
-                            <li class="list-group-item">${categoria.nombre}</li>
-                            </c:forEach>
-                    </ul>
-                </div>
-
-                <div class="col-md-9">
-                    <h5>Catálogo de Productos</h5>
-                    <hr />
-                    <div class="d-flex justify-content-between">
-                        <p>Artículos 1-20 de 100</p>
-                        <div>
-                            <select class="form-select form-select-sm" style="width: auto; display: inline-block;">
-                                <option selected>Ordenar por: Posición</option>
-                                <option value="precio">Precio</option>
-                            </select>
-                            <select class="form-select form-select-sm" style="width: auto; display: inline-block;">
-                                <option selected>Mostrar: 20</option>
-                                <option value="30">40</option>
-                                <option value="50">60</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <c:forEach items="${productos}" var="item">
-                            <div class="col-sm-3 mt-1" style="padding: 15px">
-                                <form action="CarritoControlador" method="get">
-                                    <div class="card">
-                                        <input type="hidden" name="accion" value="agregar">
-                                        <input type="hidden" name="id" value="${item.idProd}">
-                                        <img src="assets/img/Novedades/${item.imagen}" width="100%" alt="${item.nombre}" class="card-img-top"/>
-                                        <div class="card-body">
-                                            <p class="fw-bold">${item.nombre}</p>
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <button type="submit" class="btn btn-sm btn-primary">
-                                                    <i class="fa fa-shopping-cart"></i> Agregar al carrito
-                                                </button>
-                                                <small class="fw-bold">S/ <fmt:formatNumber value="${item.precio}" type="number" minFractionDigits="2" maxFractionDigits="2"/></small>
-                                            </div>
+        <section style="text-align: center;">
+            <img src="assets/img/Novedades/BannerNovedades.png" alt="Banner Novedades" class="img-fluid" width="950" height="600"/>
+        </section>
+        <div class="container">
+            <h1>✨ Novedades con olor a tinta ✨</h1>
+            <c:set var="count" value="0"/>
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-3">
+                <c:forEach items="${productos}" var="item">
+                    <c:if test="${count < 10}">
+                        <div class="col d-flex justify-content-center">
+                            <form action="CarritoControlador" method="get">
+                                <div class="card">
+                                    <input type="hidden" name="accion" value="agregar">
+                                    <input type="hidden" name="id" value="${item.idProd}">
+                                    <img src="assets/img/productos/${item.imagen}" alt="${item.nombre}" class="card-img-top"/>
+                                    <div class="card-body">
+                                        <p>${item.nombre}</p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <button type="submit" class="btn btn-sm btn-primary">
+                                                <i class="fa fa-shopping-cart"></i> Agregar al carrito
+                                            </button>
+                                            <small>S/ <fmt:formatNumber value="${item.precio}" type="number" minFractionDigits="2" maxFractionDigits="2"/></small>
                                         </div>
                                     </div>
-                                </form>
-                            </div>
-                        </c:forEach>
-                    </div>
-                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-                    </body>
-                    </html>
+                                </div>
+                            </form>
+                        </div>
+                        <c:set var="count" value="${count + 1}"/>
+                    </c:if>
+                </c:forEach>
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    </body>
+</html>
+

@@ -16,80 +16,97 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="assets/estilos.css"/>
+        <style>
+            .product-price {
+                text-align: center; 
+                margin-top: 0.5rem; 
+            }
+            .btn-small {
+                padding: 0.2rem 0.5rem; 
+                font-size: 0.8rem; 
+            }
+            /* Estilos personalizados para las tarjetas de productos */
+            .container {
+                max-width: 1200px;
+                margin: auto;
+                text-align: center;
+            }
+            .card {
+                width: 150px;
+                margin: 50px; 
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                border-radius: 10px;
+                overflow: hidden;
+            }
+            .card img {
+                height: 230px;
+                object-fit: cover;
+            }
+            .card-body p {
+                font-size: 14px;
+                font-weight: bold;
+            }
+            .card-body small {
+                font-size: 14px;
+                color: #00796b;
+            }
+        </style>
     </head>
     <body>
         <jsp:include page="components/Navegacion.jsp"/>
-
+        
         <section class="banner">
             <img src="assets/img/Novedades/BannerPromocional1.png" alt="Banner Promocional 1" class="img-fluid"/>
-            <img src="assets/img/Novedades/BannerPromocional2.png"" alt="Banner Promocional 2" class="img-fluid"/>
-            <img src="assets/img/Novedades/BannerPromocional3.png"" alt="Banner Promocional 3" class="img-fluid"/>
-        </section>
-
-        <section class="novedades">
-            <h2>Novedades</h2>
-
-            <a href="#" class="view-more">Ver más</a>
+            <img src="assets/img/Novedades/BannerPromocional2.png" alt="Banner Promocional 2" class="img-fluid"/>
+            <img src="assets/img/Novedades/BannerPromocional3.png" alt="Banner Promocional 3" class="img-fluid"/>
         </section>
 
         <div class="container-fluid mt-2">
-            <div class="row">
-                <div class="col-md-3">
-                    <h5>Filtros</h5>
-                    <hr /> 
-                    <h6>Categoría</h6>
-                    <ul class="list-group">
-                        <c:forEach items="${categorias}" var="categoria">
-                            <li class="list-group-item">${categoria.nombre}</li>
-                            </c:forEach>
-                    </ul>
-                </div>
-
-                <div class="col-md-9">
-                    <h5>Catálogo de Productos</h5>
-                    <hr />
-                    <div class="d-flex justify-content-between">
-                        <p>Artículos 1-20 de 100</p>
-                        <div>
-                            <select class="form-select form-select-sm" style="width: auto; display: inline-block;">
-                                <option selected>Ordenar por: Posición</option>
-                                <option value="precio">Precio</option>
-                            </select>
-                            <select class="form-select form-select-sm" style="width: auto; display: inline-block;">
-                                <option selected>Mostrar: 20</option>
-                                <option value="30">40</option>
-                                <option value="50">60</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <c:set var="count" value="0"/>
-                        <c:forEach items="${productos}" var="item">
-                            <c:if test="${count < 5}">
-                                <div class="col-sm-3 mt-1" style="padding: 15px">
-                                    <form action="CarritoControlador" method="get">
-                                        <div class="card">
-                                            <input type="hidden" name="accion" value="agregar">
-                                            <input type="hidden" name="id" value="${item.idProd}">
-                                            <img src="assets/img/productos/${item.imagen}" width="100%" alt="${item.nombre}" class="card-img-top"/>
-                                            <div class="card-body">
-                                                <p class="fw-bold">${item.nombre}</p>
-                                                <div class="d-flex justify-content-between align-items-center">
-                                                    <button type="submit" class="btn btn-sm btn-primary">
-                                                        <i class="fa fa-shopping-cart"></i> Agregar al carrito
-                                                    </button>
-                                                    <small class="fw-bold">S/ <fmt:formatNumber value="${item.precio}" type="number" minFractionDigits="2" maxFractionDigits="2"/></small>
-                                                </div>
-                                            </div>
+            <h2 class="text-center text-warning">Novedades</h2>
+            <div id="carouselNovedades" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <c:set var="count" value="0"/>
+                    <c:forEach items="${productos}" var="item">
+                        <c:if test="${count % 5 == 0}">
+                            <div class="carousel-item ${count == 0 ? 'active' : ''}">
+                                <div class="row justify-content-center"> 
+                        </c:if>
+                        <div class="col d-flex justify-content-center">
+                            <form action="CarritoControlador" method="get">
+                                <div class="card">
+                                    <input type="hidden" name="accion" value="agregar">
+                                    <input type="hidden" name="id" value="${item.idProd}">
+                                    <img src="assets/img/productos/${item.imagen}" alt="${item.nombre}" class="card-img-top"/>
+                                    <div class="card-body">
+                                        <p class="fw-bold">${item.nombre}</p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <button type="submit" class="btn btn-small btn-primary">
+                                                <i class="fa fa-shopping-cart"></i> Agregar al carrito
+                                            </button>
+                                            <small>S/ <fmt:formatNumber value="${item.precio}" type="number" minFractionDigits="2" maxFractionDigits="2"/></small>
                                         </div>
-                                    </form>
+                                    </div>
                                 </div>
-                                <c:set var="count" value="${count + 1}"/>
-                            </c:if>
-                        </c:forEach>
-                    </div>
+                            </form>
+                        </div>
+                        <c:set var="count" value="${count + 1}"/>
+                        <c:if test="${count % 5 == 0 || count == productos.size()}">
+                                </div> 
+                            </div> 
+                        </c:if>
+                    </c:forEach>
                 </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselNovedades" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Anterior</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselNovedades" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Siguiente</span>
+                </button>
+            </div>
+            <div class="text-center mt-3">
+                <a href="Novedades.jsp" class="btn btn-danger view-more">Ver más</a>
             </div>
         </div>
 
