@@ -16,41 +16,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="assets/estilos.css"/>
-        <style>
-            .product-price {
-                text-align: center; 
-                margin-top: 0.5rem; 
-            }
-            .btn-small {
-                padding: 0.2rem 0.5rem; 
-                font-size: 0.8rem; 
-            }
-            /* Estilos personalizados para las tarjetas de productos */
-            .container {
-                max-width: 1200px;
-                margin: auto;
-                text-align: center;
-            }
-            .card {
-                width: 150px;
-                margin: 50px; 
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                border-radius: 10px;
-                overflow: hidden;
-            }
-            .card img {
-                height: 230px;
-                object-fit: cover;
-            }
-            .card-body p {
-                font-size: 14px;
-                font-weight: bold;
-            }
-            .card-body small {
-                font-size: 14px;
-                color: #00796b;
-            }
-        </style>
+
     </head>
     <body>
         <jsp:include page="components/Navegacion.jsp"/>
