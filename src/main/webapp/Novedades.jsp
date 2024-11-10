@@ -55,7 +55,7 @@
             <img src="assets/img/Novedades/BannerNovedades.png" alt="Banner Novedades" class="img-fluid" width="950" height="600"/>
         </section>
         <div class="container">
-            <h1>✨ Novedades con olor a tinta ✨</h1>
+            <h1 style="color: #efb810">✨ Novedades con olor a tinta ✨</h1>
             <c:set var="count" value="0"/>
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-3">
                 <c:forEach items="${productos}" var="item">

@@ -1,7 +1,7 @@
 <%-- 
     Document   : Mensaje
     Created on : 2 nov. 2024, 18:34:36
-    Author     : braya
+    Author     : tania
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -23,7 +23,7 @@
         Swal.fire({
             title: "¡Advertencia!",
             text: "${sessionScope.error}",
-            icon: "success"
+            icon: "error"
         });
 
     </script>

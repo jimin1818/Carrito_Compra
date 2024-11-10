@@ -13,115 +13,18 @@
     <div class="top-bar">
         <p>Donde hay libros, hay magia. ¡Sumérgete en la magia de la lectura!</p>
     </div>
-
 </head>
-<style>
-    /* Eliminar el margen y el padding del cuerpo para que el color cubra toda la página */
-    body, html {
-        margin: 0;
-        padding: 0;
-        width: 100%;
-        height: 100%;
-        background-color: #000; /* Fondo negro por defecto */
-    }
-
-    /* Contenedor de la barra superior (top-bar) */
-    .top-bar {
-        background-color: red;
-        color: white;
-        padding: 5px 0;
-        text-align: center;
-        font-weight: bold;
-        width: 100%;
-    }
-
-    /* Navbar y categorías */
-    .navbar, .categories-container {
-        background: linear-gradient(90deg, #8B0000, #000000); /* Degradado de rojo oscuro a negro */
-        color: white;
-        padding: 10px 0;
-        display: flex;
-        align-items: center;
-    }
-
-    /* Ajuste del contenedor del logo para que no tenga márgenes ni padding adicionales */
-    .navbar img {
-        margin: 0;
-        padding: 0;
-        display: block; /* Asegura que no haya espacio alrededor de la imagen */
-    }
-
-    .navbar .logo {
-        display: flex;
-        flex-direction: column;
-        margin-left: 10px; /* Espacio entre el logo y el texto */
-    }
-
-    /* Estilos para el logo y texto principal */
-    .navbar .logo .title {
-        font-family: 'Georgia', serif;
-        font-weight: bold;
-        color: #efb810; /* Color dorado */
-        font-size: 1.8em;
-    }
-    .navbar .logo .tagline {
-        color: #f5d473; /* Un dorado más claro */
-        font-size: 0.9em;
-    }
-
-    /* Barra de búsqueda */
-    .search-bar input[type="text"] {
-        padding: 5px 10px;
-        border: 1px solid #efb810;
-        border-radius: 4px;
-    }
-    .search-bar button {
-        background-color: #efb810;
-        border: none;
-        color: black;
-        padding: 5px 8px;
-        cursor: pointer;
-        border-radius: 4px;
-    }
-
-    /* Estilos para los íconos de navegación */
-    .nav-icons a, .nav-icons span {
-        color: white;
-        font-weight: bold;
-        text-decoration: none;
-    }
-    .nav-icons a:hover, .nav-icons span:hover {
-        color: #efb810; /* Cambia a dorado en hover */
-    }
-
-    /* Sección de categorías */
-    .categories-container {
-        padding: 15px 0;
-        width: 100%;
-        text-align: center;
-    }
-    .categories a {
-        color: white;
-        padding: 10px 15px;
-        font-weight: bold;
-        text-decoration: none;
-    }
-    .categories a:hover {
-        color: #f5d473; /* Dorado claro en hover */
-    }
-</style>
-
 <body>
     <div class="navbar">
-        <img src="assets/img/recursos/logo.png" alt="Logo" style="width: 120px; height: auto;">
-
-        <div class="logo">
-            <a href="index.jsp" style="text-decoration: none; color: #efb810;"> 
-                <span class="title">Susurros de Tinta</span>  
-                <small class="tagline">Entre Páginas Mágicas</small>
-            </a>
+        <div class="logo-container">
+            <img src="assets/img/recursos/logo.png" alt="Logo" class="logo-img">
+            <div class="logo">
+                <a href="index.jsp" style="text-decoration: none; color: #efb810;"> 
+                    <span class="title">Susurros de Tinta</span>  
+                    <small class="tagline">Entre Páginas Mágicas</small>
+                </a>
+            </div>
         </div>
-
         <div class="search-bar">
             <input type="text" placeholder="Buscar por título, autor o ISBN">
             <button><svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
@@ -132,24 +35,28 @@
         <div class="nav-icons">
             <c:if test="${sessionScope.usuario == null}">
                 <a href="ClienteControlador?accion=nuevo" class="btn btn-dark">
-                    <i class="fas fa-user-plus"></i> Registrarse
+                    <i class="fas fa-user-plus" style="letter-spacing:5px;"></i> Registrarse
                 </a>
                 &nbsp;
                 <a href="AuthControlador?accion=login" class="btn btn-dark">
-                    <i class="fas fa-user-lock"></i> Login
+                    <i class="fas fa-user-lock" style="letter-spacing:5px;"></i> Login
                 </a>
             </c:if>
-
-            <c:if test="${sessionScope.usuario != null}">
-                <span class="btn btn-light">${sessionScope.usuario.nombresCompletos()}</span>
-                &nbsp;
-                <a href="AuthControlador?accion=logout" class="btn btn-dark">
-                <i class="fa fa-sing-out-alt"></i> Cerrar Sesión
-                </a>
+            <c:if test="${sessionScope.usuario != null}">          
+                <a href="PedidoControlador?accion=mis_pedidos" class="btn btn-dark">
+                    <i class="fa fa-receipt" style="letter-spacing:5px;"></i>  Mis pedidos
+                </a>              
             </c:if>
             <a href="CarritoControlador?accion=listar" class="btn btn-dark">
                 <i class="fa fa-shopping-cart"></i> (<span class="fw-bold">${sessionScope.carrito != null? sessionScope.carrito.size(): 0}</span>) Carrito
             </a>
+            <c:if test="${sessionScope.usuario != null}">
+                <span class="btn btn-light">${sessionScope.usuario.nombresCompletos()}</span>
+                &nbsp;
+                <a href="AuthControlador?accion=logout" class="btn btn-dark">
+                    <i class="fa fa-sing-out-alt" style="letter-spacing:5px;"></i> Cerrar Sesión
+                </a>
+            </c:if>
         </div>
     </div>
 
