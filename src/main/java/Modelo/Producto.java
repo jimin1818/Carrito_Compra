@@ -14,6 +14,7 @@ public class Producto {
     private String nombre;
     private double precio;
     private String imagen;
+     private int idCategoria;
 
     public int getIdProd() {
         return idProd;
@@ -45,6 +46,14 @@ public class Producto {
 
     public void setImagen(String imagen) {
         this.imagen = imagen;
+    }
+
+    public int getIdCategoria() {
+        return idCategoria;
+    }
+
+    public void setIdCategoria(int idCategoria) {
+        this.idCategoria = idCategoria;
     }
 
 

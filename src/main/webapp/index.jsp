@@ -16,103 +16,280 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link href="assets/css/estilos.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"/>
+
         <style>
-            .product-price {
-                text-align: center; 
-                margin-top: 0.5rem; 
+            .slider-for {
+                width: 100%;
+                margin: 0 auto;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                overflow: hidden;
             }
-            .btn-small {
-                padding: 0.2rem 0.5rem; 
-                font-size: 0.8rem; 
+
+            .slider-for img {
+                width: 100%;
+                height: auto;
+                object-fit: cover; 
             }
-            .container {
+
+            .slider-container {
+                width: 80%;
                 max-width: 1200px;
-                margin: auto;
                 text-align: center;
+                margin: 0 auto;
+            }
+
+            .thumbnail-slider {
+                width: 100%;
+                max-width: 600px;
+                margin: 20px auto;
+            }
+
+            .thumbnail {
+                width: 70px;
+                height: 70px;
+                background-color: white;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 1.2em;
+                color: #2196F3;
+                margin: 0 5px;
+                cursor: pointer;
+            }
+
+            .slick-prev button, .slick-next button {
+                font-size: 2em;
+                color: white;
+                background: none;
+                border: none;
+                cursor: pointer;
+                outline: none;
+            }
+
+            .slick-prev, .slick-next {
+                z-index: 1;
+            }
+
+            .carousel-container {
+                position: relative;
+                width: 80%;
+                margin: 50px auto; 
+            }
+
+            .carousel {
+                width: 80%;
+                margin: auto;
+            }
+
+            .carousel-item {
+                background: #ffffff;
+                font-size: 16px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: auto;
+                border-radius: 5px;
+                transition: transform 0.3s ease;
+                margin: 0 5px;
+            }
+            .carousel-item small {
+                color: #efb810;
             }
             .card {
-                width: 150px;
-                margin: 50px; 
+                width: auto;
+                margin: 0 auto;
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
                 border-radius: 10px;
                 overflow: hidden;
+                background-color: white;
+                text-align: center;
             }
+
             .card img {
-                height: 230px;
-                object-fit: cover;
+                width: 600px;
+                height: auto;
+                object-fit: contain;
+                border-bottom: 2px solid #ddd;
             }
-            .card-body p {
-                font-size: 14px;
+
+            .slick-center .carousel-item {
+                background: #ffffff;
+                color: #ff8c00;
                 font-weight: bold;
+                transform: scale(1.1);
             }
-            .card-body small {
-                font-size: 14px;
-                color: #00796b;
+
+            .carousel-button {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                background-color: transparent;
+                color: white;
+                border: none;
+                padding: 10px;
+                font-size: 20px;
+                cursor: pointer;
+                transition: color 0.3s;
+            }
+
+            .carousel-button:hover {
+                color: #ff8c00;
+            }
+
+            .prev-btn {
+                left: -25px;
+            }
+
+            .next-btn {
+                right: -25px;
+            }
+
+            .carousel-item img {
+                max-width: 100%;
+                height: auto;
+                object-fit: cover;
             }
         </style>
     </head>
     <body>
         <jsp:include page="components/Navegacion.jsp"/>
-        
-        <section class="banner">
-            <img src="assets/img/Novedades/BannerPromocional1.png" alt="Banner Promocional 1" class="img-fluid"/>
-            <img src="assets/img/Novedades/BannerPromocional2.png" alt="Banner Promocional 2" class="img-fluid"/>
-            <img src="assets/img/Novedades/BannerPromocional3.png" alt="Banner Promocional 3" class="img-fluid"/>
-        </section>
 
-        <div class="container-fluid mt-2">
-            <h2 class="text-center text-warning">Novedades</h2>
-            <div id="carouselNovedades" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    <c:set var="count" value="0"/>
-                    <c:forEach items="${productos}" var="item">
-                        <c:if test="${count % 5 == 0}">
-                            <div class="carousel-item ${count == 0 ? 'active' : ''}">
-                                <div class="row justify-content-center"> 
-                        </c:if>
-                        <div class="col d-flex justify-content-center">
-                            <form action="CarritoControlador" method="get">
-                                <div class="card">
-                                    <input type="hidden" name="accion" value="agregar">
-                                    <input type="hidden" name="id" value="${item.idProd}">
-                                    <img src="assets/img/productos/${item.imagen}" alt="${item.nombre}" class="card-img-top"/>
-                                    <div class="card-body">
-                                        <p class="fw-bold">${item.nombre}</p>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <button type="submit" class="btn btn-small btn-primary">
-                                                <i class="fa fa-shopping-cart"></i> Agregar al carrito
-                                            </button>
-                                            <small>S/ <fmt:formatNumber value="${item.precio}" type="number" minFractionDigits="2" maxFractionDigits="2"/></small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <c:set var="count" value="${count + 1}"/>
-                        <c:if test="${count % 5 == 0 || count == productos.size()}">
-                                </div> 
-                            </div> 
-                        </c:if>
-                    </c:forEach>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselNovedades" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Anterior</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselNovedades" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Siguiente</span>
-                </button>
-            </div>
-            <div class="text-center mt-3">
-                <a href="Novedades.jsp" class="btn btn-danger view-more">Ver más</a>
+        <!-- Primer Carrusel -->
+        <div class="slider-for">
+            <div><img src="assets/img/Banners/banner1.png" alt="Imagen 1"/></div>
+            <div><img src="assets/img/Banners/banner2.png" alt="Imagen 2"/></div>
+            <div><img src="assets/img/Banners/banner6.png" alt="Imagen 3"/></div>
+            <div><img src="assets/img/Banners/banner4.png" alt="Imagen 4"/></div>
+            <div><img src="assets/img/Banners/banner5.png" alt="Imagen 5"/></div>
+        </div>
+
+        <div class="slider-container">
+            <div class="slider-nav thumbnail-slider">
+                <div class="thumbnail">1</div>
+                <div class="thumbnail">2</div>
+                <div class="thumbnail">3</div>
+                <div class="thumbnail">4</div>
+                <div class="thumbnail">5</div>
             </div>
         </div>
 
-        <footer>
-            <p>&copy; 2024 Susurros de Tinta Entre Páginas Mágicas - Todos los derechos reservados</p>
-        </footer>
+    <center>
+        <h1 style="color: #efb810">✨ Novedades✨</h1>
+    </center>       
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    </body>
+    <!-- Carrusel de productos -->
+    <div class="carousel-container">
+        <div class="carousel center">
+            <c:forEach items="${productos}" var="item">
+                <div class="carousel-item">
+                    <form action="CarritoControlador" method="get">
+                        <div class="card">
+                            <input type="hidden" name="accion" value="agregar">
+                            <input type="hidden" name="id" value="${item.idProd}">
+                            <a class="nav-link" href="CarritoControlador?accion=filtrarPorCategoria&idCategoria=2"></a>
+                            <img src="assets/img/Novedades/${item.imagen}" alt="${item.nombre}" class="img-fluid">
+                            <p>${item.nombre}</p>
+                            <small>S/ <fmt:formatNumber value="${item.precio}" type="number" minFractionDigits="2" maxFractionDigits="2"/></small>
+                            <button type="submit" class="btn btn-sm btn-primary mt-2">
+                                <i class="fa fa-shopping-cart"></i> Agregar al carrito
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </c:forEach>
+        </div>
+
+        <button class="carousel-button prev-btn"><i class="fas fa-chevron-left"></i></button>
+        <button class="carousel-button next-btn"><i class="fas fa-chevron-right"></i></button>
+    </div>
+
+    <footer class="bg-dark text-white p-3 mt-5">
+        <p>&copy; 2024 Susurros de Tinta Entre Páginas Mágicas - Todos los derechos reservados</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.slider-for').slick({
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                arrows: true,
+                fade: true,
+                asNavFor: '.slider-nav',
+                autoplay: true,
+                autoplaySpeed: 4000,
+                pauseOnHover: true
+            });
+
+            $('.slider-nav').slick({
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                asNavFor: '.slider-for',
+                centerMode: true,
+                focusOnSelect: true,
+                prevArrow: '<button class="slick-prev"><i class="fas fa-chevron-left"></i></button>',
+                nextArrow: '<button class="slick-next"><i class="fas fa-chevron-right"></i></button>',
+                responsive: [
+                    {
+                        breakpoint: 768,
+                        settings: {
+                            slidesToShow: 2
+                        }
+                    },
+                    {
+                        breakpoint: 480,
+                        settings: {
+                            slidesToShow: 1
+                        }
+                    }
+                ]
+            });
+
+            var slickCarousel = $('.carousel');
+            slickCarousel.slick({
+                slidesToShow: 5,
+                slidesToScroll: 1,
+                arrows: false,
+                autoplay: true,
+                autoplaySpeed: 3000,
+                centerMode: true,
+                focusOnSelect: true,
+                responsive: [
+                    {
+                        breakpoint: 1200,
+                        settings: {
+                            slidesToShow: 3
+                        }
+                    },
+                    {
+                        breakpoint: 992,
+                        settings: {
+                            slidesToShow: 2
+                        }
+                    },
+                    {
+                        breakpoint: 768,
+                        settings: {
+                            slidesToShow: 1
+                        }
+                    }
+                ]
+            });
+
+            $('.prev-btn').click(function () {
+                slickCarousel.slick('slickPrev');
+            });
+
+            $('.next-btn').click(function () {
+                slickCarousel.slick('slickNext');
+            });
+        });
+    </script>
+</body>
 </html>
